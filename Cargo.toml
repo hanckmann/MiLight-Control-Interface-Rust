@@ -1,0 +1,15 @@
+[package]
+name = "milight"
+version = "0.0.1"
+authors = ["Patrick Hanckmann <hanckmann@gmail.com>"]
+
+[[bin]]
+name = "milight"
+path = "src/milight.rs"
+
+[lib]
+name = "mci"
+path = "src/mci.rs"
+
+[dependencies]
+clap = "2"
