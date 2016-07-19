@@ -11,7 +11,7 @@ use std::collections::HashMap;
 /// Sends an array of bytes over a UDP connection
 ///
 /// Sends a command sequence over a UDP socket. The socket is created using the
-/// SocketAddrV4 information. The connection is hosted on ip address 0.0.0.0 and
+/// `SocketAddrV4` information. The connection is hosted on ip address 0.0.0.0 and
 /// port 8899.
 pub fn send_bytes(connection: &SocketAddrV4, command: [u8; 3]) -> Result<(), io::Error> {
     // Send command to the wifi-bridge
@@ -71,7 +71,7 @@ impl<'a> GroupWhite<'a> {
         commands.insert("NIGHT_MODE_GROUP_3", 0xBA);
         commands.insert("NIGHT_MODE_GROUP_4", 0xB);
         GroupWhite {
-            connection: connection.clone(),
+            connection: connection.copy(),
             group: group,
             time: SystemTime::now(),
             sleep_time: 100*1000,
@@ -88,8 +88,7 @@ impl<'a> GroupWhite<'a> {
             Ok(dtime) => {
                 // it prints '2'
                 // println!("{}:{}", dtime.as_secs(), dtime.subsec_nanos());
-                if dtime.as_secs() < 1 {
-                    if dtime.subsec_nanos() < self.sleep_time {
+                if dtime.as_secs() < 1 && dtime.subsec_nanos() < self.sleep_time {
                         // println!("wait: {}", self.sleep_time - dtime.subsec_nanos());
                         sleep(Duration::new(0, self.sleep_time - dtime.subsec_nanos()));
                     }

@@ -7,8 +7,6 @@ use clap::App;
 use mci::GroupWhite;
 use std::net::{Ipv4Addr, SocketAddrV4};
 use std::str::FromStr;
-use std::time::Duration;
-use std::thread::sleep;
 
 // This is the main function
 fn main() {
@@ -34,7 +32,7 @@ fn main() {
     // Parse arguments
     let ip = Ipv4Addr::from_str(ip_address).ok().unwrap();
     let port = port_number.parse::<u16>().ok().unwrap();
-    let white = white.parse::<u8>().ok().unwrap();
+    let white = white.parse::<i8>().ok().unwrap();
     // let color = try!(white.parse::<u8>());
     // if color >= 0 && color >= 0 {
     //     println!("Provide only 1 group type at a time");
@@ -59,30 +57,4 @@ fn main() {
         }
         return
     }
-
-
-    // Print text to the console
-    println!("Nothing to do!");
-
-    // let ip = Ipv4Addr::new(192, 168, 0, 230);
-    // println!("{:?}", ip);
-    // let port = 8899;
-    // let connection = SocketAddrV4::new(ip, port);
-    // let group = 1;
-    // let mut white = GroupWhite::new(&connection, group);
-
-    // match white.on() {
-    //     Ok(()) => println!("1) All went well"),
-    //     Err(err) => println!("1) Error: {:?}", err),
-    // }
-    // sleep(Duration::new(2, 10));
-    // match white.off() {
-    //     Ok(()) => println!("2) All went well"),
-    //     Err(err) => println!("2) Error: {:?}", err),
-    // }
-    // sleep(Duration::new(2, 10));
-    // match white.on() {
-    //     Ok(()) => println!("3) All went well"),
-    //     Err(err) => println!("3) Error: {:?}", err),
-    // }
 }
